@@ -1,4 +1,4 @@
-type Measurement = {
+export type Measurement = {
   durationMs: number;
   bytes: number;
 }

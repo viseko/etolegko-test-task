@@ -1,22 +1,32 @@
-import { measureRequest } from "./helpers/measureRequest";
+import { Measurement, measureRequest } from "./helpers/measureRequest";
 import { parseURL } from "./helpers/parseURL";
 
-const REQUEST_COUNT = 10;
+const REQUEST_COUNT = 15;
 
 async function main() {
   const url = process.argv[2];
   const parsedURL = parseURL(url);
 
-  const measurement = [];
+  const measurements: Measurement[] = [];
 
   for (let i = 1; i <= REQUEST_COUNT; i++) {
     const measure = await measureRequest(parsedURL);
-    measurement.push(measure);
+    measurements.push(measure);
 
-    const durartion = measure.durationMs.toFixed(2);
+    const duration = measure.durationMs.toFixed(2);
 
-    console.log(`${i}. ${measure.bytes} байт, ${durartion} мс`)
+    console.log(`${i}. ${measure.bytes} байт, ${duration} мс`)
   }
+
+  const totalBytes = measurements.reduce((sum, m) => sum + m.bytes, 0);
+  const totalMBytes = (totalBytes / 1e6).toFixed(2);
+  const totalMs= measurements.reduce((sum, m) => sum + m.durationMs, 0);
+  const avgMs = (totalMs / measurements.length).toFixed(2);
+  const speedMbsp = ((totalBytes * 8) / 1e6 / (totalMs  / 1000)).toFixed(2);
+
+  console.log(`Объем данных: ${totalMBytes} МБ;`);
+  console.log(`Среднее время запроса: ${avgMs} мс;`);
+  console.log(`Скорость: ${speedMbsp} Мбит/сек`);
 }
 
 main().catch((err) => {
