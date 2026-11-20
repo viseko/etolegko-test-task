@@ -20,13 +20,14 @@ async function main() {
 
   const totalBytes = measurements.reduce((sum, m) => sum + m.bytes, 0);
   const totalMBytes = (totalBytes / 1e6).toFixed(2);
-  const totalMs= measurements.reduce((sum, m) => sum + m.durationMs, 0);
+  const totalMs = measurements.reduce((sum, m) => sum + m.durationMs, 0);
   const avgMs = (totalMs / measurements.length).toFixed(2);
-  const speedMbps = ((totalBytes * 8) / 1e6 / (totalMs  / 1000)).toFixed(2);
+  const speedMbps = ((totalBytes * 8) / 1e6 / (totalMs / 1000)).toFixed(2);
 
-  console.log(`Объем данных: ${totalMBytes} МБ;`);
-  console.log(`Среднее время запроса: ${avgMs} мс;`);
-  console.log(`Скорость: ${speedMbps} Мбит/сек`);
+  console.log("=========");
+  console.log(`Объем данных: ${totalMBytes} МБ.`);
+  console.log(`Среднее время запроса: ${avgMs} мс.`);
+  console.log(`Скорость: ${speedMbps} Мбит/сек.`);
 }
 
 main().catch((err) => {

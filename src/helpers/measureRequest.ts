@@ -3,7 +3,7 @@ export type Measurement = {
   bytes: number;
 }
 
-export async function measureRequest(url: URL):Promise<Measurement> {
+export async function measureRequest(url: URL): Promise<Measurement> {
   const startTime = performance.now();
   const response = await fetch(url, {
     headers: {

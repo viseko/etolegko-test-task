@@ -2,7 +2,9 @@
   "name": "internet-speed-checker",
   "version": "1.0.0",
   "main": "dist/index.js",
-  "engines": { "node": ">=18" },
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "dev": "tsx src/index.ts",
     "build": "tsc",
