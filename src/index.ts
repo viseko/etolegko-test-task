@@ -1,7 +1,7 @@
-import { Measurement, measureRequest } from "./helpers/measureRequest";
+import { type Measurement, measureRequest } from "./helpers/measureRequest";
 import { parseURL } from "./helpers/parseURL";
 
-const REQUEST_COUNT = 15;
+const REQUEST_COUNT = 10;
 
 async function main() {
   const url = process.argv[2];
@@ -22,11 +22,11 @@ async function main() {
   const totalMBytes = (totalBytes / 1e6).toFixed(2);
   const totalMs= measurements.reduce((sum, m) => sum + m.durationMs, 0);
   const avgMs = (totalMs / measurements.length).toFixed(2);
-  const speedMbsp = ((totalBytes * 8) / 1e6 / (totalMs  / 1000)).toFixed(2);
+  const speedMbps = ((totalBytes * 8) / 1e6 / (totalMs  / 1000)).toFixed(2);
 
   console.log(`Объем данных: ${totalMBytes} МБ;`);
   console.log(`Среднее время запроса: ${avgMs} мс;`);
-  console.log(`Скорость: ${speedMbsp} Мбит/сек`);
+  console.log(`Скорость: ${speedMbps} Мбит/сек`);
 }
 
 main().catch((err) => {
